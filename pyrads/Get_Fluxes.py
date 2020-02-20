@@ -43,6 +43,11 @@ def Fplus(i,data):
 def Fplus_alternative(i,data):
     return data.B_surf*trans(i,-1,data.tau) - numint( data.B[i:,:],x=trans(i,slice(i,None),data.tau), axis=0)
 
+### tha 02/20/2020
+### Add calculation for downward longwave flux at surface
+### CAREFUL! I don't really know if this is right...
+def Fminus(i, data):
+    return data.B_surf - numint(data.B[:i+1,:], x = trans(i,slice(None,i+1),data.tau), axis = 0)
 
 ### Compute exp(-tau) weighted vertical integrals.
 ### For feedback calculations, I need to compute atmospheric integrals like this:
